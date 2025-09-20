@@ -57,7 +57,8 @@ def buscar_curso_nombre(nombre):
     print("Curso no encontrado")
 
 def actualizar_nota_curso(nombre):
-    for c in cursos: #c recorre la lista y verifica si el nombre ingresado por el usuario exista
+    for c in cursos: 
+        #c recorre la lista y verifica si el nombre ingresado por el usuario exista
         #.lower es para que pase cualquier letra ingresada por el usuario a minuscula
         if c["curso"].lower() == nombre.lower():
             #al verificar que exista el curso pide una nueva nota al usuario
@@ -68,8 +69,28 @@ def actualizar_nota_curso(nombre):
             return
     print("Curso no encotrado")
 
-"""ciclo while para que al realizar algun cambio o accion el programa no termine
-hasta que el usuario elija salir del programa"""
+def eliminar_curso(accion):
+        if accion.lower() == "si":
+            if len(cursos)>0:
+                print(cursos)
+                nombre=input("Ingrese el nombre del curso a eliminar: ")
+                curso = None
+                for c in cursos:
+                    if c["curso"].lower() == nombre.lower():
+                        curso = c
+                        break
+            if curso: 
+                cursos.remove(curso)
+                print("Eliminando el curso: ", curso["curso"])
+                print("lista de cursos actualizada: ", cursos)
+                print("")
+            else:
+                print("Curso no encontrado....")
+        else: 
+            print("No hay cursos en existensia....")
+
+#ciclo while para que al realizar algun cambio o accion el programa no termine
+#hasta que el usuario elija salir del programa
 
 while True:
     print("")
@@ -105,14 +126,14 @@ while True:
         print("== Buscar curso ==")
         nombre = input("Ingrese el nombre del curso a buscar: ")
         buscar_curso_nombre(nombre)
-        break
     elif opcion == 6: 
         print("== Actualizar nota ==")
         nombre = input("Ingrese el nombre de curso a cambiar la nota: ")
         actualizar_nota_curso(nombre)
     elif opcion == 7: 
         print("== Eliminar curso==")
-        break
+        accion = input("Desea eliminar un curso?")
+        eliminar_curso(accion)
     elif opcion == 8: 
         print("== Ordenar curso por nota ==")
         break
